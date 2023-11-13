@@ -1,12 +1,27 @@
+require "byebug"
+
 class MaxIntSet
+
+  attr_reader :max
+  attr_accessor :store
+
   def initialize(max)
     @store = Array.new(max, false)
+    @max = max
   end
 
   def insert(num)
+    is_valid?(num)
+    i = num % @store.length
+    @store[i] = true
+    
   end
 
   def remove(num)
+    is_valid?(num)
+    i = num % @store.length
+    @store[i] = false
+
   end
 
   def include?(num)
@@ -17,7 +32,7 @@ class MaxIntSet
   private
 
   def is_valid?(num)
-    raise 'out of bounds' if num > max || num < 0 
+    raise 'Out of bounds' if num > @store.length || num < 0
   end
 
   def validate!(num)
