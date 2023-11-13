@@ -20,7 +20,6 @@ class MaxIntSet
     is_valid?(num)
     i = num % @store.length
     @store[i] = false
-
   end
 
   def include?(num)
@@ -46,27 +45,26 @@ class IntSet
   end
 
   def insert(num)
-    return false if include?(num)
-      self[num] << num 
-      num
-  #   if include?(num) == false
-  #     self.store[num] << num
-  #   end
-  #   false
+    return false if self.include?(num)
+    bucket = num % num_buckets
+      @store[bucket].push(num)
   end
 
   def remove(num)
+    bucket = num % num_buckets
+      @store[bucket].delete(num)
   end
 
   def include?(num)
-    self[num].include?(num)
+    bucket =  
+    @store[bucket].include?(num)
   end
 
   private
 
-  def [](num)
-    self.store(num % num_buckets)
-  end
+  # def [](num)
+  #   self.store[num % num_buckets]
+  # end
 
   def num_buckets
     @store.length
@@ -78,7 +76,7 @@ class ResizingIntSet
 
   def initialize(num_buckets = 20)
     @store = Array.new(num_buckets) { Array.new }
-    @count = 0
+    @count = 
   end
 
   def insert(num)
@@ -88,6 +86,7 @@ class ResizingIntSet
   end
 
   def include?(num)
+    
   end
 
   private
